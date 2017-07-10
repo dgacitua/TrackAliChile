@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import uiRouter from 'angular-ui-router';
+import uiRouter from '@uirouter/angularjs';
 import Loader from 'angular-ecmascript/module-loader';
 
 import RoutesConfig from './views/routes';

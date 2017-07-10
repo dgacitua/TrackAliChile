@@ -5,7 +5,10 @@ export default class MainCtrl extends Controller {
     super(...arguments);
 
     this.myVar = 1313;
+    this.code = '';
+  }
 
+  trackCode(code) {
     this.TrackerService.queryCorreosChile('RB254433138SG').then((data) => {
       this.result1 = data;  
     });

@@ -1,15 +1,12 @@
+import { Service } from 'angular-ecmascript/module-helpers';
+
 import correoschile from 'correos-chile';
 import geartrack from 'geartrack';
 
-/*@ngInject*/
-export default class TrackerService {
-  constructor($q) {
-    this.$q = $q;
-  }
-
-  queryCorreosChile(codigo) {
+export default class TrackerService extends Service {
+  queryCorreosChile(code) {
     return this.$q((resolve, reject) => {
-      correoschile([codigo]).then((res) => {
+      correoschile([code]).then((res) => {
         console.log(res);
         resolve(res);
       }).catch((err) => {
@@ -19,9 +16,9 @@ export default class TrackerService {
     });
   }
 
-  queryAliexpress(codigo) {
+  queryAliexpress(code) {
     return this.$q((resolve, reject) => {
-      geartrack.cainiao.getInfo(codigo, (err, res) => {
+      geartrack.cainiao.getInfo(code, (err, res) => {
         if (!err) {
           console.log(res);
           resolve(res.status);
@@ -34,3 +31,5 @@ export default class TrackerService {
     });
   }
 }
+
+TrackerService.$inject = ['$q'];

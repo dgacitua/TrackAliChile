@@ -1,5 +1,10 @@
 <p>Nothing here! {{ main.myVar }}</p>
 
+<form id="code" class="input-group" ng-submit="main.trackCode(main.code)">
+  <input type="text" class="form-control" placeholder="Insertar código de rastreo" ng-model="main.code" />
+  <button type="submit">Localizar Paquete</button>
+</form>
+
 <pre>{{ main.result1 }}</pre>
 
 <pre>{{ main.result2 }}</pre>
