@@ -1,10 +1,41 @@
-<p>Nothing here! {{ main.myVar }}</p>
+<div class="container-fluid">
+  <div class="page-header">
+    <h1>TrackAliChile <small>Rastrea tus pedidos de Aliexpress Standard Shipping y Correos Chile</small></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <form id="correosChileForm" ng-submit="main.trackAliexpress(main.code1)">
+        <div class="input-group">
+          <input type="text" class="form-control input-full" placeholder="Insertar código Aliexpress Standard Shipping" ng-model="main.code1" />
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-warning">Localizar en Aliexpress/Cainiao</button>
+          </span>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="btn btn-full" ng-click="main.convertCode()">Convertir Código -></button>
+    </div>
+    <div class="col-md-5">
+      <form id="correosChileForm" ng-submit="main.trackCoreosChile(main.code2)">
+        <div class="input-group">
+          <input type="text" class="form-control input-full" placeholder="Insertar código CorreosChile" ng-model="main.code2" />
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">Localizar en CorreosChile</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <pre class="col-md-6">{{ main.resultAliexpress | json: 2 }}</pre>
+    <pre class="col-md-6">{{ main.resultCorreosChile | json: 2 }}</pre>
+  </div>
+</div>
 
-<form id="code" class="input-group" ng-submit="main.trackCode(main.code)">
-  <input type="text" class="form-control" placeholder="Insertar código de rastreo" ng-model="main.code" />
-  <button type="submit">Localizar Paquete</button>
-</form>
-
-<pre>{{ main.result1 }}</pre>
-
-<pre>{{ main.result2 }}</pre>
+<style type="text/css">
+.btn-full {
+  width: 100%;
+}
+</style>

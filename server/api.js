@@ -12,7 +12,7 @@ Meteor.methods({
 
       let response = Promise.await(correoschile([code]));
 
-      return response;
+      return response[0];
     }
     catch (err) {
       console.error(err);
