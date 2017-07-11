@@ -10,8 +10,11 @@
     "angular-ecmascript": "0.0.3",
     "angular-meteor": "^1.3.12",
     "babel-runtime": "^6.23.0",
+    "cheerio": "^1.0.0-rc.2",
     "correos-chile": "^1.2.4",
-    "geartrack": "^2.8.10",
-    "meteor-node-stubs": "~0.2.4"
+    "he": "^1.1.1",
+    "meteor-node-stubs": "~0.2.4",
+    "moment-timezone": "^0.5.13",
+    "requestretry": "^1.12.0"
   }
 }
