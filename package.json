@@ -2,7 +2,8 @@
   "name": "TrackAliChile",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "serve": "LC_ALL=C.UTF-8 meteor"
   },
   "dependencies": {
     "@uirouter/angularjs": "^1.0.3",
