@@ -10,9 +10,12 @@ Meteor.methods({
     try {
       check(code, String);
 
-      let response = Promise.await(correoschile([code]));
+      let response = Promise.await(correoschile([code])),
+            result = response[0];
 
-      return response[0];
+      result.id = code;
+
+      return result;
     }
     catch (err) {
       console.error(err);
