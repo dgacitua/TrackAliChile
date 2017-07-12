@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import TrackerService from './tracker.service';
+import TrackerService from '../services/tracker.service';
 
 export default angular.module('services', [])
 .service('TrackerService', TrackerService);

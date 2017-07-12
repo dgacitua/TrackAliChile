@@ -4,9 +4,9 @@
   </div>
   <div class="row">
     <div class="col-md-5">
-      <form id="correosChileForm" ng-submit="main.trackAliexpress(main.code1)">
+      <form id="correosChileForm" ng-submit="main.trackAliexpress(main.codes.qAli)">
         <div class="input-group">
-          <input type="text" class="form-control input-full" placeholder="Insertar código Aliexpress Standard Shipping" ng-model="main.code1" />
+          <input type="text" class="form-control input-full" placeholder="Insertar código Aliexpress Standard Shipping" ng-model="main.codes.qAli" />
           <span class="input-group-btn">
             <button type="submit" class="btn btn-warning">Localizar en Aliexpress/Cainiao</button>
           </span>
@@ -14,12 +14,12 @@
       </form>
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-full" ng-click="main.convertCode()">Convertir Código -></button>
+      <button type="button" class="btn btn-expand" ng-click="main.convertCode()">Convertir Código -></button>
     </div>
     <div class="col-md-5">
-      <form id="correosChileForm" ng-submit="main.trackCoreosChile(main.code2)">
+      <form id="correosChileForm" ng-submit="main.trackCorreosChile(main.codes.qCorreos)">
         <div class="input-group">
-          <input type="text" class="form-control input-full" placeholder="Insertar código CorreosChile" ng-model="main.code2" />
+          <input type="text" class="form-control input-full" placeholder="Insertar código CorreosChile" ng-model="main.codes.qCorreos" />
           <span class="input-group-btn">
             <button type="submit" class="btn btn-primary">Localizar en CorreosChile</button>
           </span>
@@ -29,13 +29,23 @@
   </div>
   <br>
   <div class="row">
-    <pre class="col-md-6">{{ main.resultAliexpress | json: 2 }}</pre>
-    <pre class="col-md-6">{{ main.resultCorreosChile | json: 2 }}</pre>
+    <div class="col-md-6">
+      <div ng-if="main.processingAli==='loading'">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Cargando desde Aliexpress/Cainiao...</span>
+      </div>
+      <div ng-if="main.processingAli==='done'">
+        <pre>{{ main.resultAliexpress | json: 2 }}</pre>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div ng-if="main.processingCorreos==='loading'">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Cargando desde CorreosChile...</span>
+      </div>
+      <div ng-if="main.processingCorreos==='done'">
+        <pre>{{ main.resultCorreosChile | json: 2 }}</pre>
+      </div>
+    </div>
   </div>
 </div>
-
-<style type="text/css">
-.btn-full {
-  width: 100%;
-}
-</style>

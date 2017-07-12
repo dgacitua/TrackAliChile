@@ -1,5 +1,8 @@
 import { Service } from 'angular-ecmascript/module-helpers';
 
+const correosChileCodeLength = 12;
+const lotOffset = 3;
+
 export default class TrackerService extends Service {
   queryCorreosChile(code) {
     return this.$q((resolve, reject) => {
@@ -17,6 +20,15 @@ export default class TrackerService extends Service {
         else reject(err);
       });
     });
+  }
+
+  convertCode(code) {
+    if (!isNaN(code) && code.length === 26) {
+      return code.substring(code.length-(correosChileCodeLength+lotOffset), code.length-lotOffset);
+    }
+    else {
+      return code;
+    }
   }
 }
 
