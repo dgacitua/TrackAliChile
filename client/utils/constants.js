@@ -1,0 +1,9 @@
+export const appName = 'TrackAliChile';
+export const appDescription = 'Rastreo de paquetes en AliExpress Standard Shipping y CorreosChile';
+export const backendPort = 8082;
+export const backendURL = `${location.protocol}//${location.hostname}:${backendPort}`;
+export const pingEndpoint = '/api/ping';
+export const cainiaoEndpoint = '/api/cainiao';
+export const correosChileEndpoint = '/api/correos-chile';
+export const correosChileCodeLength = 12;
+export const correosChileOffset = 3;

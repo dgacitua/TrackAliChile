@@ -1,25 +1,9 @@
-import { Config } from 'angular-ecmascript/module-helpers';
+import Home from '../templates/Home.vue';
+import About from '../templates/About.vue';
+import NotFound from '../templates/NotFound.vue';
 
-import mainTpl from '../views/main/main.html';
-import tracklistTpl from '../views/tracklist/tracklist.html';
-
-export default class RoutesConfig extends Config {
-  configure() {
-    this.$stateProvider
-      .state('track', {
-        url: '/track?qAli&qCorreos',
-        templateUrl: mainTpl,
-        controller: 'MainCtrl as main'
-      })
-      .state('tracklist', {
-        url: '/tracklist',
-        templateUrl: tracklistTpl,
-        controller: 'TracklistCtrl as tracklist'
-      });
- 
-    this.$urlRouterProvider.otherwise('/track');
-    this.$locationProvider.html5Mode(true);
-  }
-}
- 
-RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
+export default [
+  { path: '/', name: 'home', component: Home },
+  { path: '/about', name: 'about', component: About },
+  { path: '*', name: 'not-found', component: NotFound }
+];

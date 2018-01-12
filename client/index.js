@@ -1,30 +1,23 @@
-import { Meteor } from 'meteor/meteor';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import VueMaterial from 'vue-material';
 
-import angular from 'angular';
-import angularMeteor from 'angular-meteor';
-import uiRouter from '@uirouter/angularjs';
-import Loader from 'angular-ecmascript/module-loader';
+import 'vue-material/dist/vue-material.css';
+import 'vue-material/dist/theme/default.css';
 
-import RoutesConfig from './modules/routes';
-import ServicesConfig from './modules/services';
+import App from './templates/App.vue';
+import Routes from './modules/routes.js';
 
-import MainCtrl from './views/main/main';
-import TracklistCtrl from './views/tracklist/tracklist';
+Vue.use(VueRouter);
+Vue.use(VueMaterial);
 
-const app = 'trackalichile';
+const router = new VueRouter({
+  mode: 'history',
+  routes: Routes
+});
 
-angular.module(app, [
-  angularMeteor,
-  uiRouter,
-  ServicesConfig.name,
-  app
-]);
-
-new Loader(app)
-  .load(MainCtrl)
-  .load(TracklistCtrl)
-  .load(RoutesConfig);
-
-angular.element(document).ready(() => {
-  angular.bootstrap(document, [ app ]);
+new Vue({
+  el: '#app',
+  router,
+  render: h => h(App)
 });

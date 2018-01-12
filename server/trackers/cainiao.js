@@ -10,8 +10,8 @@ import he from 'he';
 const cainiaoEndpoint = 'https://global.cainiao.com/detail.htm?mailNoList=';
 const zone = 'Asia/Shanghai';
 
-export default class Tracker {
-  static cainiao(code, callback) {
+export default class CainiaoTracker {
+  static getPackage(code, callback) {
     request.get({
       url: cainiaoEndpoint + code,
       timeout: 10000,
@@ -22,7 +22,7 @@ export default class Tracker {
       jar: true,
       json: true,
       gzip: true
-    }, function (error, response, body) {
+    }, (error, response, body) => {
       if (error || response.statusCode != 200) {
         callback(error);
       }
@@ -31,7 +31,7 @@ export default class Tracker {
            newBody = he.decode(parser('#waybill_list_val_box').val()),
              value = JSON.parse(newBody);
 
-        if (value.data[0].errorCode == "ORDER_NOT_FOUND" || value.data[0].errorCode == "RESULT_EMPTY") {
+        if (value.data[0].errorCode === 'ORDER_NOT_FOUND' || value.data[0].errorCode === 'RESULT_EMPTY') {
           callback('Order not found or empty!');
         }
         else {
@@ -40,16 +40,19 @@ export default class Tracker {
                  msgs = section.detailList.map(m => {
                   return {
                     state: m.desc,
-                    date: moment.tz(m.time, "YYYY-MM-DD HH:mm:ss", zone).format()
+                    date: moment.tz(m.time, 'YYYY-MM-DD HH:mm:ss', zone).format('DD/MM/YYYY HH:mm:ss'),
+                    location: null
                   }
                 });
 
           let entity = {
             id: code,
-            states: msgs,
-            destinyId: destinyId,
-            trackerWebsite: cainiaoEndpoint + code,
-            retries: response.attempts
+            data: {
+              destinyId: destinyId,
+              retries: response.attempts,
+              trackerWebsite: cainiaoEndpoint + code
+            },
+            states: msgs
           };
 
           callback(null, entity);
