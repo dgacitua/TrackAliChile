@@ -1,18 +1,18 @@
 <template>
-  <md-app md-mode="reveal">
-    <md-app-toolbar class="md-primary">
+  <div class="full-height" md-mode="reveal">
+    <md-toolbar class="md-primary">
       <md-button class="md-icon-button" @click="menuVisible = !menuVisible">
         <md-icon>menu</md-icon>
       </md-button>
       <span class="md-title">{{ appName }}</span>
-    </md-app-toolbar>
-    <md-app-drawer :md-active.sync="menuVisible">
+    </md-toolbar>
+    <md-drawer :md-active.sync="menuVisible">
       <sidebar></sidebar>
-    </md-app-drawer>
-    <md-app-content>
+    </md-drawer>
+    <md-content>
       <router-view></router-view>
-    </md-app-content>
-  </md-app>
+    </md-content>
+  </div>
 </template>
 
 <script>
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style scoped>
-.md-app {
-  max-height: 100vh;
+.full-height {
+  height: 100vh;
 }
 </style>
