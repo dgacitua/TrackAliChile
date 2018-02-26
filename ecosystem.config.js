@@ -19,7 +19,7 @@ module.exports = {
       host : [ 'dgacitua.info' ],
       ref  : 'origin/master',
       repo : 'git@github.com:dgacitua/TrackAliChile.git',
-      path : '/var/www/production',
+      path : '/var/www/trackalichile/production',
       'post-deploy' : 'npm install && npm run build && npm run deploy-client && pm2 reload ecosystem.config.js --env production',
       env  : {
         NODE_ENV: 'production'
@@ -30,7 +30,7 @@ module.exports = {
       host : [ 'localhost' ],
       ref  : 'origin/master',
       repo : 'git@github.com:dgacitua/TrackAliChile.git',
-      path : '/var/www/development',
+      path : '/var/www/trackalichile/development',
       'post-deploy' : 'npm install && npm run build && npm run deploy-client && pm2 reload ecosystem.config.js --env production',
       env  : {
         NODE_ENV: 'dev'
