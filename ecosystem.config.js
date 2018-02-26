@@ -6,7 +6,7 @@ module.exports = {
   apps : [
     {
       name      : 'TrackAliChile',
-      script    : './dist/server/index.js'
+      script    : 'server/main.js'
     }
   ],
   /**
