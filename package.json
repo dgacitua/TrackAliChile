@@ -14,7 +14,7 @@
     "build-client": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build-server": "cross-env NODE_ENV=production babel ./server -d ./dist/server -s --presets env",
     "deploy": "npm run deploy-server && npm run deploy-client",
-    "deploy-client": "http-server ./dist/client -p 8080",
+    "deploy-client": "http-server ./dist/client -p 8081",
     "deploy-server": "node ./dist/server/index.js",
     "clean": "shx rm -rf ./dist && shx mkdir -p ./dist/server ./dist/client",
     "test": "echo \"Error: no test specified\" && exit 1"
