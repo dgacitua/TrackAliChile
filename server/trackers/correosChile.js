@@ -12,7 +12,7 @@ export default class CorreosChileTracker {
         if (res[0].datosgenerales) {
           response.data = {
             destinyId: res[0].datosgenerales['Envio'],
-            deliveryDate: moment.tz(res[0].datosgenerales['Fecha_Entrega'], 'DD/MM/YYYY HH:mm', zone).format('DD/MM/YYYY HH:mm:ss')  || null,
+            deliveryDate: moment.tz(res[0].datosgenerales['Fecha_Entrega'], 'DD/MM/YYYY HH:mm', zone).isValid() ? moment.tz(res[0].datosgenerales['Fecha_Entrega'], 'DD/MM/YYYY HH:mm', zone).format('DD/MM/YYYY HH:mm:ss') : null,
             receiver: res[0].datosgenerales['Entregado_a'] || null,
             receiverId: res[0].datosgenerales['Rut'] || null
           }
@@ -25,7 +25,7 @@ export default class CorreosChileTracker {
           response.states = res[0].registros.map(s => {
             return {
               state: s.estado,
-              date: moment.tz(s.fecha, 'DD/MM/YYYY HH:mm', zone).format('DD/MM/YYYY HH:mm:ss'),
+              date: moment.tz(s.fecha, 'DD/MM/YYYY HH:mm', zone).isValid() ? moment.tz(s.fecha, 'DD/MM/YYYY HH:mm', zone).format('DD/MM/YYYY HH:mm:ss') : null,
               location: s.lugar
             }
           })

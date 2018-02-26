@@ -1,8 +1,9 @@
+import Helpers from './helpers';
 import CainiaoTracker from './trackers/cainiao';
 import CorreosChileTracker from './trackers/correosChile';
 
 export default class TrackerApi {
-  static queryCorreosChile(req, res) {
+  static singleQueryCorreosChile(req, res) {
     let code = req.params.code;
 
     CorreosChileTracker.getPackage(code, (err, track) => {
@@ -16,7 +17,7 @@ export default class TrackerApi {
     });
   }
 
-  static queryCainiao(req, res) {
+  static singleQueryCainiao(req, res) {
     let code = req.params.code;
 
     CainiaoTracker.getPackage(code, (err, track) => {
@@ -28,6 +29,52 @@ export default class TrackerApi {
         res.json(track);
       }
     });
+  }
+
+  static multipleQueryCorreosChile(req, res) {
+    let codeArray = req.body;
+
+    if (Helpers.isArray(codeArray) && codeArray.length <= 10) {
+      let requests = codeArray.map((code) => {
+        return Helpers.promisify(CorreosChileTracker.getPackage, code);
+      });
+
+      Promise.all(requests)
+        .then((responses) => {
+          res.json(responses);
+        })
+        .catch((err) => {
+          console.error('Correos Chile Error!', err);
+          res.sendStatus(500);
+        });
+    }
+    else {
+      console.error('Input array not valid!');
+      res.sendStatus(501);
+    }
+  }
+
+  static multipleQueryCainiao(req, res) {
+    let codeArray = req.body;
+    
+    if (Helpers.isArray(codeArray) && codeArray.length <= 10) {
+      let requests = codeArray.map((code) => {
+        return Helpers.promisify(CainiaoTracker.getPackage, code);
+      });
+
+      Promise.all(requests)
+        .then((responses) => {
+          res.json(responses);
+        })
+        .catch((err) => {
+          console.error('Cainiao Error!', err);
+          res.sendStatus(500);
+        });
+    }
+    else {
+      console.error('Input array not valid!');
+      res.sendStatus(501);
+    }
   }
 
   static ping(req, res) {

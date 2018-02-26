@@ -40,7 +40,7 @@ export default class CainiaoTracker {
                  msgs = section.detailList.map(m => {
                   return {
                     state: m.desc,
-                    date: moment.tz(m.time, 'YYYY-MM-DD HH:mm:ss', zone).format('DD/MM/YYYY HH:mm:ss'),
+                    date: moment.tz(m.time, 'YYYY-MM-DD HH:mm:ss', zone).isValid() ? moment.tz(m.time, 'YYYY-MM-DD HH:mm:ss', zone).format('DD/MM/YYYY HH:mm:ss') : null,
                     location: null
                   }
                 });

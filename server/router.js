@@ -7,8 +7,10 @@ export default function setRoutes(app) {
 
   // API definitions
   router.get('/ping', TrackerApi.ping);
-  router.get('/cainiao/:code', TrackerApi.queryCainiao);
-  router.get('/correos-chile/:code', TrackerApi.queryCorreosChile);
+  router.get('/cainiao/:code', TrackerApi.singleQueryCainiao);
+  router.get('/correos-chile/:code', TrackerApi.singleQueryCorreosChile);
+  router.post('/cainiao', TrackerApi.multipleQueryCainiao);
+  router.post('/correos-chile', TrackerApi.multipleQueryCorreosChile);
 
   app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
