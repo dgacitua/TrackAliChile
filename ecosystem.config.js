@@ -25,7 +25,7 @@ module.exports = {
         NODE_ENV: 'production'
       }
     },
-    dev : {
+    development : {
       user : 'dgacitua',
       host : [ 'localhost' ],
       ref  : 'origin/master',
@@ -33,7 +33,7 @@ module.exports = {
       path : '/var/www/trackalichile/development',
       'post-deploy' : 'npm install && npm run build && npm run deploy-client && pm2 reload ecosystem.config.js --env production',
       env  : {
-        NODE_ENV: 'dev'
+        NODE_ENV: 'development'
       }
     }
   }
