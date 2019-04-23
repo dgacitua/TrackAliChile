@@ -29,12 +29,56 @@
     </form>
     <div class="md-layout md-alignment-center-center">
       <div class="md-layout-item md-size-85" v-if="resultStatus === 'cainiao'">
-        <h3>Resultado en AliExpress/Cainiao</h3>
-        <pre>{{ trackResult }}</pre>
+        <md-card>
+          <md-card-header>
+            <md-card-media>
+              <img v-bind:src="AliExpressLogo" alt="AliExpress Standard Shipping">
+            </md-card-media>
+            <md-card-header-text class="leftMargin">
+              <h3>Resultado en AliExpress/Cainiao</h3>
+              <div><b>ID:</b> {{ trackResult.id }}</div>
+            </md-card-header-text>              
+          </md-card-header>
+          <md-card-content>
+            <md-card v-for="(stateObj, index) in trackResult.states" :key="index">
+              <md-card-header>
+                <md-icon class="md-size-2x">flight_takeoff</md-icon>
+                <md-card-header-text class="leftMargin">
+                    <div><b>Estado:</b> {{ stateObj.state }}</div>
+                    <div><b>Fecha:</b> {{ stateObj.date }}</div>
+                </md-card-header-text>
+              </md-card-header>
+            </md-card>
+          </md-card-content>
+        </md-card>
       </div>
       <div class="md-layout-item md-size-85" v-else-if="resultStatus === 'correos-chile'">
-        <h3>Resultado en CorreosChile</h3>
-        <pre>{{ trackResult }}</pre>
+        <md-card>
+          <md-card-header>
+            <md-card-media>
+              <img v-bind:src="CorreosChileLogo" alt="CorreosChile">
+            </md-card-media>
+            <md-card-header-text class="leftMargin">
+              <h3>Resultado en CorreosChile</h3>
+              <div><b>ID:</b> {{ trackResult.id }}</div>
+              <div><b>Fecha de entrega:</b> {{ trackResult.data.deliveryDate }}</div>
+              <div><b>Receptor:</b> {{ trackResult.data.receiver }}</div>
+              <div><b>RUT Receptor:</b> {{ trackResult.data.receiverId }}</div>
+            </md-card-header-text>              
+          </md-card-header>
+          <md-card-content>
+            <md-card v-for="(stateObj, index) in trackResult.states" :key="index">
+              <md-card-header>
+                <md-icon class="md-size-2x">flight_land</md-icon>
+                <md-card-header-text class="leftMargin">
+                    <div><b>Estado:</b> {{ stateObj.state }}</div>
+                    <div><b>Fecha:</b> {{ stateObj.date }}</div>
+                    <div><b>Ubicación:</b> {{ stateObj.location }}</div>
+                </md-card-header-text>
+              </md-card-header>
+            </md-card>
+          </md-card-content>
+        </md-card>
       </div>
       <div class="md-layout-item md-size-85" v-else-if="resultStatus === 'loading'">
         <div class="md-layout md-alignment-center-center">
@@ -51,7 +95,7 @@
       </div>
       <div class="md-layout-item md-size-85" v-else>
         <p>Ingresa un código de AliExpress Standard Shipping, China Post, Singapore Post o CorreosChile.</p>
-        <p>Ejemplo: <i>12891902267000204623069001</i> o <i>RB351146770SG</i></p>
+        <p>Ejemplo: <span class="mono">12891902267000204623069001</span> o <span class="mono">RB351146770SG</span></p>
       </div>
     </div>
   </div>
@@ -59,6 +103,8 @@
 
 <script>
 import Tracker from '../services/tracker';
+import AliExpressLogo from '../assets/aliexpress-logo.png';
+import CorreosChileLogo from '../assets/correoschile-logo.jpg';
 
 export default {
   name: 'home',
@@ -70,7 +116,9 @@ export default {
       code: '',
       trackResult: '',
       pingResult: '',
-      resultStatus: 'none'
+      resultStatus: 'none',
+      AliExpressLogo: AliExpressLogo,
+      CorreosChileLogo: CorreosChileLogo
     }
   },
   computed: {
@@ -112,4 +160,15 @@ export default {
 </script>
 
 <style scoped>
+.mono {
+  font-family: 'Lucida Console', Monaco, monospace;
+}
+
+#codeForm {
+  margin: 10px 10px 10px 10px;
+}
+
+.leftMargin {
+  margin-left: 5px;
+}
 </style>

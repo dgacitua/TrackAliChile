@@ -10,7 +10,7 @@
       <sidebar></sidebar>
     </md-drawer>
     <md-content>
-      <router-view></router-view>
+      <router-view id="app"></router-view>
     </md-content>
   </div>
 </template>
@@ -37,5 +37,9 @@ export default {
 <style scoped>
 .full-height {
   height: 100vh;
+}
+
+#app {
+  padding: 10px 10px 10px 10px;
 }
 </style>
