@@ -1,0 +1,19 @@
+{
+  "name": "trackalichile",
+  "version": "3.0.0",
+  "author": "Daniel Gacitua",
+  "license": "AGPL-3.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "npm run build && babel-watch dist/index.js",
+    "build": "babel index.js -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "babel-watch": "^7.5.0"
+  }
+}
